@@ -1,19 +1,31 @@
 "use client";
 import { useContext } from "react";
 import { AuthenticationContext } from "@/context/AuthenticationContext";
-import { Container, Typography } from "@mui/material";
-import PostCard from '@/app/dashboard/PostCard'
+import { Container, Stack, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
+import PostCard from "@/app/dashboard/PostCard";
+import PersonIcon from "@mui/icons-material/Person";
 
 export default function Dashboard() {
-  const { userActive } = useContext(AuthenticationContext);
+  const { push } = useRouter();
+  const { userActive, setUserActive } = useContext(AuthenticationContext);
+  const ok = sessionStorage.getItem("userActive");
 
+  const cleanSesion = () => {
+    sessionStorage.clear();
+    setUserActive("");
+    push("/");
+  };
   return (
     <Container>
-        <h2>Bienvenido {`${userActive}`}</h2>
-        <Typography>
-          Aquí-
-        </Typography>
-        <PostCard></PostCard>
+      <Stack direction="row">
+        <h2>
+          Bienvenido
+          <span>{userActive && ` ${ok}`}</span>
+        </h2>
+        <PersonIcon onClick={cleanSesion}></PersonIcon>
+      </Stack>
+      <PostCard></PostCard>
     </Container>
   );
 }

@@ -3,11 +3,13 @@ import React from "react";
 import { useContext } from "react";
 import { GetDataApiContext } from "@/context/GetDataApiContext";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import TextIncreaseIcon from "@mui/icons-material/TextIncrease";
+import EditIcon from '@mui/icons-material/Edit';
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import { AuthenticationContext } from "@/context/AuthenticationContext";
 
 export default function PostCard() {
   const { postList } = useContext(GetDataApiContext);
+  const { userActive } = useContext(AuthenticationContext);
 
   return (
     <Box>
@@ -31,26 +33,28 @@ export default function PostCard() {
           <Typography variant="h6" sx={{ color: "black" }}>
             {post.body}
           </Typography>
-          <Stack  direction="row" spacing={2}>
-            <Button
-              variant="contained"
-              size="small"
-              startIcon={<AddCircleIcon />}
-              type="onSubmit"
-            />
-            <Button
-              variant="contained"
-              size="small"
-              startIcon={<TextIncreaseIcon />}
-              type="onSubmit"
-            />
-            <Button
-              variant="contained"
-              size="small"
-              startIcon={<RemoveCircleIcon />}
-              type="onSubmit"
-            />
-          </Stack>
+          {userActive === 'Administrador' && (
+            <Stack direction="row" spacing={2}>
+              <Button
+                variant="contained"
+                size="small"
+                startIcon={<AddCircleIcon />}
+                onClick={() => handleAddButtonClick(post.id)}
+              />
+              <Button
+                variant="contained"
+                size="small"
+                startIcon={<EditIcon />}
+                onClick={() => handleEditButtonClick(post.id)}
+              />
+              <Button
+                variant="contained"
+                size="small"
+                startIcon={<RemoveCircleIcon />}
+                onClick={() => handleRemoveButtonClick(post.id)}
+              />
+            </Stack>
+          )}
         </Box>
       ))}
     </Box>
