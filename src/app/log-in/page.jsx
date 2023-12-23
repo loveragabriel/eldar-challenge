@@ -14,8 +14,7 @@ import { useContext } from "react";
 import { AuthenticationContext } from "@/context/AuthenticationContext";
 
 localStorage.setItem("userList", JSON.stringify(users));
-console.log(localStorage.getItem('userList')[0]); 
-
+console.log(localStorage.getItem("userList")[0]);
 
 export default function LogIn({ users, alertSeverity, alertMessage }) {
   const [alertStatus, setAlertStatus] = useState("");
@@ -42,10 +41,10 @@ export default function LogIn({ users, alertSeverity, alertMessage }) {
       sessionStorage.setItem("key", "value");
       setAlertStatus("success");
       saveUserInLocalStorage("userActive", "Administrador");
-      console.log(localStorage.getItem('userActive')); 
+      console.log(localStorage.getItem("userActive"));
       setTimeout(() => {
         push("/dashboard");
-      }, 2000); 
+      }, 2000);
     } else if (inputData.user === "Usuario") {
       saveUserInLocalStorage("userActive", "Usuario");
       setAlertStatus("success");
@@ -63,6 +62,7 @@ export default function LogIn({ users, alertSeverity, alertMessage }) {
         display: "flex",
         flexDirection: "column",
         justifyItems: "center",
+        height: "100vh",
         margin: {
           xs: "10vh 5vw",
           sm: "10vh 25vw",
