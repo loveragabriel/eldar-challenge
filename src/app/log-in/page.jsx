@@ -13,11 +13,15 @@ import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { AuthenticationContext } from "@/context/AuthenticationContext";
 
-localStorage.setItem("userList", JSON.stringify(users));
-console.log(localStorage.getItem("userList")[0]);
+localStorage.setItem("userList", JSON.stringify(users)); //Cargo las credenciales al localStorage
 
 export default function LogIn({ users, alertSeverity, alertMessage }) {
   const [alertStatus, setAlertStatus] = useState("");
+  const [isInputWrong, setIsInputWrong] = useState({
+    isEmpty: false,
+    isNumber: false,
+    errorMessage: "",
+  });
   const { push } = useRouter();
   const { saveUserInLocalStorage, userActive } = useContext(
     AuthenticationContext
@@ -36,6 +40,28 @@ export default function LogIn({ users, alertSeverity, alertMessage }) {
     }));
   };
 
+  const inputValidation = () => {
+    if (inputData.user === "") {
+      setIsInputWrong({
+        isEmpty: true,
+        isNumber: false,
+        errorMessage: "El nombre de usuario es requerido",
+      });
+    } else if (!isNaN(inputData.user)) {
+      setIsInputWrong({
+        isEmpty: false,
+        isNumber: true,
+        errorMessage: "El nombre de usuario no puede ser un número",
+      });
+    } else {
+      setIsInputWrong({
+        isEmpty: false,
+        isNumber: false,
+        errorMessage: "Esto",
+      });
+    }
+  };
+
   const submitInputData = () => {
     if (inputData.user === "Administrador") {
       sessionStorage.setItem("key", "value");
@@ -44,7 +70,7 @@ export default function LogIn({ users, alertSeverity, alertMessage }) {
       console.log(localStorage.getItem("userActive"));
       setTimeout(() => {
         push("/dashboard");
-      }, 2000);
+      }, 1000);
     } else if (inputData.user === "Usuario") {
       saveUserInLocalStorage("userActive", "Usuario");
       setAlertStatus("success");
@@ -82,7 +108,18 @@ export default function LogIn({ users, alertSeverity, alertMessage }) {
           variant="outlined"
           name="user"
           onChange={onChangeInputData}
+          onBlur={inputValidation}
         />
+        {isInputWrong.isNumber && (
+          <Typography variant="text2" color="error">
+            {isInputWrong.errorMessage}
+          </Typography>
+        )}
+        {isInputWrong.isEmpty && (
+          <Typography variant="text2" color="error">
+            {isInputWrong.errorMessage}
+          </Typography>
+        )}
         <TextField
           id="outlined-basic"
           label="Credenciales"
@@ -92,7 +129,17 @@ export default function LogIn({ users, alertSeverity, alertMessage }) {
         />
       </Stack>
       {alertStatus === "success" && (
-        <Alert severity="success">Bienvenido! {userActive}</Alert>
+        <Alert
+          sx={{
+            position: "fixed",
+            top: "10vh",
+            margin: "0 auto",
+          }}
+          variant="filled"
+          severity="success"
+        >
+          Bienvenido {userActive}
+        </Alert>
       )}
 
       <Button
