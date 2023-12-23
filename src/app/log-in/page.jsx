@@ -15,18 +15,19 @@ export default function LogIn() {
     }));
   };
 
-  const submitInputData =()=>{
+  const submitInputData = () => {
     console.log(inputData.user + inputData.credential);
-  }
+  };
   return (
     <Box
       sx={{
         display: "flex",
         flexDirection: "column",
         justifyItems: "center",
-        marginTop: "10vh",
-        marginRight: "20px",
-        marginLeft: "20px",
+        margin: {
+          xs: "0vw 5vw",
+          sm: "0vw 25vw",
+        },
       }}
     >
       <Typography
