@@ -18,12 +18,30 @@ export default function Dashboard() {
   };
   return (
     <Container>
-      <Stack direction="row">
-        <h2>
+      <Stack
+        direction="row"
+        sx={{
+          height: "100px",
+          alignItems: "center",
+          display: {
+            sm: "flex",
+          },
+          justifyContent: "space-between",
+          '&:hover':{
+            cursor:'pointer'
+          }
+        }}
+      >
+        <Typography variant="h6" component="h4">
           Bienvenido
-          <span>{userActive && ` ${ok}`}</span>
-        </h2>
-        <PersonIcon onClick={cleanSesion}></PersonIcon>
+          <Typography variant="text1" color="#00008B">
+            {userActive && ` ${ok}`}
+          </Typography>
+        </Typography>
+        <Stack direction="column" alignItems="center">
+          <PersonIcon color="primary" onClick={cleanSesion}></PersonIcon>
+          <Typography variant="caption">Cerrar</Typography>
+        </Stack>
       </Stack>
       <PostCard></PostCard>
     </Container>
