@@ -27,9 +27,6 @@ export default function Dashboard() {
             sm: "flex",
           },
           justifyContent: "space-between",
-          '&:hover':{
-            cursor:'pointer'
-          }
         }}
       >
         <Typography variant="h6" component="h4">
@@ -38,7 +35,16 @@ export default function Dashboard() {
             {userActive && ` ${ok}`}
           </Typography>
         </Typography>
-        <Stack direction="column" alignItems="center">
+        <Stack
+          direction="column"
+          alignItems="center"
+          sx={{
+            "&:hover": {
+              cursor: "pointer",
+              color: "primary", // Change the color on hover
+            },
+          }}
+        >
           <PersonIcon color="primary" onClick={cleanSesion}></PersonIcon>
           <Typography variant="caption">Cerrar</Typography>
         </Stack>
