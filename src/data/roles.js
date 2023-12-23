@@ -2,12 +2,12 @@ const users = [
     {
         name: 'Usuario',
         credencial: 'Clave_123456',
-        role: 'user'
+        userId:2023, 
     },
     {
         name: 'Administrador',
         credencial: 'Admin.123456',
-        role: 'admin'
+        userId:2024
     }
 ]
 

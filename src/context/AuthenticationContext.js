@@ -14,12 +14,12 @@ export default function AuthenticationProvider({ children }) {
         }
     }, []);
 
-    const saveUserInLocalSesion = (keyValue, dataValue) => {
+    const saveUserInLocalStorage = (keyValue, dataValue) => {
         localStorage.setItem(`${keyValue}`, `${dataValue}`);
         setUserActive(localStorage.getItem(`${keyValue}`));
     }
     return (
-        <AuthenticationContext.Provider value={{ saveUserInLocalSesion, userActive, setUserActive }}>
+        <AuthenticationContext.Provider value={{ saveUserInLocalStorage, userActive, setUserActive }}>
             {children}
         </AuthenticationContext.Provider>
     )

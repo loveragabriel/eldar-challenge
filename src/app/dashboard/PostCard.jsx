@@ -1,17 +1,18 @@
 import { Box, Stack, Typography, Button } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { GetDataApiContext } from "@/context/GetDataApiContext";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import EditIcon from "@mui/icons-material/Edit";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { AuthenticationContext } from "@/context/AuthenticationContext";
-
+import NewPostForm from '@/components/NewPostForm'
 export default function PostCard() {
+  const [displayPostForm, setDisplayPostForm] = useState(false); 
   const { postList } = useContext(GetDataApiContext);
   const { userActive } = useContext(AuthenticationContext);
   const addNewPost =()=>{
-    alert('New Post')
+    setDisplayPostForm(true)
   }
 
   const updatePost =()=>{
@@ -68,6 +69,7 @@ export default function PostCard() {
           )}
         </Box>
       ))}
+     {displayPostForm && <NewPostForm/>}
     </Box>
   );
 }
