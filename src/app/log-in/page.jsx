@@ -1,8 +1,19 @@
 "use client";
 import { Box, Stack, TextField, Typography, Button } from "@mui/material";
 import { useState } from "react";
+import users from "../../data/roles";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { AuthenticationContext } from "@/context/AuthenticationContext";
 
-export default function LogIn() {
+localStorage.setItem("userList", JSON.stringify(users));
+
+export default function LogIn({ users }) {
+  const { push } = useRouter();
+  const { saveUserInLocalSesion, userActive } = useContext(
+    AuthenticationContext
+  );
+
   const [inputData, setInputData] = useState({
     user: "",
     credential: "",
@@ -16,7 +27,18 @@ export default function LogIn() {
   };
 
   const submitInputData = () => {
-    console.log(inputData.user + inputData.credential);
+    if (inputData.user === "Administrador") {
+      sessionStorage.setItem("key", "value");
+      alert("Administrador");
+      saveUserInLocalSesion("userActive", "Administrador");
+      push("/dashboard");
+    } else if (inputData.user === "Usuario") {
+      saveUserInLocalSesion("userActive", "Usuario");
+      alert("Usuario");
+      push("/dashboard");
+    } else {
+      alert("Debe ingresar con las credenciales correctas!");
+    }
   };
   return (
     <Box
