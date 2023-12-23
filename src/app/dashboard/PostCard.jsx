@@ -3,13 +3,24 @@ import React from "react";
 import { useContext } from "react";
 import { GetDataApiContext } from "@/context/GetDataApiContext";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from "@mui/icons-material/Edit";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { AuthenticationContext } from "@/context/AuthenticationContext";
 
 export default function PostCard() {
   const { postList } = useContext(GetDataApiContext);
   const { userActive } = useContext(AuthenticationContext);
+  const addNewPost =()=>{
+    alert('New Post')
+  }
+
+  const updatePost =()=>{
+    alert('Update Post')
+  }
+
+  const deletePost =()=>{
+    alert('Delete Post')
+  }
 
   return (
     <Box>
@@ -33,25 +44,25 @@ export default function PostCard() {
           <Typography variant="h6" sx={{ color: "black" }}>
             {post.body}
           </Typography>
-          {userActive === 'Administrador' && (
+          {userActive === "Administrador" && (
             <Stack direction="row" spacing={2}>
               <Button
                 variant="contained"
                 size="small"
                 startIcon={<AddCircleIcon />}
-                onClick={() => handleAddButtonClick(post.id)}
+                onClick={(addNewPost)}
               />
               <Button
                 variant="contained"
                 size="small"
                 startIcon={<EditIcon />}
-                onClick={() => handleEditButtonClick(post.id)}
+                onClick={(updatePost)}
               />
               <Button
                 variant="contained"
                 size="small"
                 startIcon={<RemoveCircleIcon />}
-                onClick={() => handleRemoveButtonClick(post.id)}
+                onClick={(deletePost)}
               />
             </Stack>
           )}

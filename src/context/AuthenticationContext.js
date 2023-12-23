@@ -8,15 +8,15 @@ export default function AuthenticationProvider({ children }) {
     const [userActive, setUserActive] = useState('');
 
     useEffect(() => {
-        const storedUserActive = sessionStorage.getItem('userActive');
+        const storedUserActive = localStorage.getItem('userActive');
         if (storedUserActive) {
             setUserActive(storedUserActive);
         }
     }, []);
 
     const saveUserInLocalSesion = (keyValue, dataValue) => {
-        sessionStorage.setItem(`${keyValue}`, `${dataValue}`);
-        setUserActive(sessionStorage.getItem(`${keyValue}`));
+        localStorage.setItem(`${keyValue}`, `${dataValue}`);
+        setUserActive(localStorage.getItem(`${keyValue}`));
     }
     return (
         <AuthenticationContext.Provider value={{ saveUserInLocalSesion, userActive, setUserActive }}>

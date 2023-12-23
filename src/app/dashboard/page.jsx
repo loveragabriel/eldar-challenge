@@ -9,10 +9,10 @@ import PersonIcon from "@mui/icons-material/Person";
 export default function Dashboard() {
   const { push } = useRouter();
   const { userActive, setUserActive } = useContext(AuthenticationContext);
-  const ok = sessionStorage.getItem("userActive");
+  const ok = localStorage.getItem("userActive");
 
   const cleanSesion = () => {
-    sessionStorage.clear();
+    localStorage.clear();
     setUserActive("");
     push("/");
   };
