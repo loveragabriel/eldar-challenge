@@ -1,12 +1,14 @@
-'use client'
+"use client";
 import { useContext } from "react";
 import { AuthenticationContext } from "@/context/AuthenticationContext";
+import { Container } from "@mui/material";
 
-export default function Dashboard(){
+export default function Dashboard() {
+  const { userActive } = useContext(AuthenticationContext);
 
-    const {userActive} = useContext(AuthenticationContext)
-
-    return(
+  return (
+    <Container>
         <h2>Bienvenido {`${userActive}`}</h2>
-    )
+    </Container>
+  );
 }

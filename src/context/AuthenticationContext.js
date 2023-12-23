@@ -14,7 +14,6 @@ export default function AuthenticationProvider({ children }) {
         <AuthenticationContext.Provider value={{ saveUserInLocalSesion, userActive, setUserActive }}>
             {children}
         </AuthenticationContext.Provider>
-
     )
 }
 
