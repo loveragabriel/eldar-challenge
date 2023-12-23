@@ -25,8 +25,8 @@ export default function LogIn() {
         flexDirection: "column",
         justifyItems: "center",
         margin: {
-          xs: "0vw 5vw",
-          sm: "0vw 25vw",
+          xs: "10vh 5vw",
+          sm: "10vh 25vw",
         },
       }}
     >
