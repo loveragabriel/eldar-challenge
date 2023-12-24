@@ -2,7 +2,20 @@
 export const boxStyles = {
     display: "flex",
     flexDirection: "column",
-    marginBottom: "1rem",
+    marginBottom: "1rem",   
+  };
+
+  export const boxStylesCards = {
+    padding: 2,
+    marginBottom: 2,
+    border: '1px solid #ccc',
+    borderRadius: 8,
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    transition: 'transform 0.3s ease-in-out',
+    '&:hover': {
+      transform: 'scale(1.05)',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    }
   };
   
   export const titleStyles = {
@@ -11,6 +24,9 @@ export const boxStyles = {
       sm: "2rem",
     },
     color: "blue",
+    '&::first-letter': {
+      textTransform: 'uppercase',
+    }
   };
   
   export const bodyStyles = {

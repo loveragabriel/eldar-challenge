@@ -1,5 +1,5 @@
 // PostCard.js
-import { Box, Stack, Typography, Button, Alert } from "@mui/material";
+import { Box, Stack, Typography, Button, Alert, Container } from "@mui/material";
 import { useContext } from "react";
 import { GetDataApiContext } from "@/context/GetDataApiContext";
 import { AuthenticationContext } from "@/context/AuthenticationContext";
@@ -15,6 +15,8 @@ import {
   bodyStyles,
   buttonStyles,
   alertContainerStyles,
+  boxStylesCards, 
+  cardsBox
 } from "@/app/dashboard/stylesPostCard";
 
 export default function PostCard() {
@@ -74,7 +76,7 @@ export default function PostCard() {
   };
 
   return (
-    <Box sx={boxStyles}>
+    <Container sx={boxStyles}>
       <Typography
         variant="h5"
         sx={{ fontSize: { xs: "1.5rem", sm: "2.5rem" } }}
@@ -82,10 +84,10 @@ export default function PostCard() {
         Últimos Post
       </Typography>
       {userActive == "admin" || userActive == "user" ? (
-        <>
+        <Box sx={cardsBox}>
           {postList.map((post) => (
-            <Box key={post.id} sx={boxStyles}>
-              <Typography variant="h3" sx={titleStyles}>
+            <Box key={post.id} sx={boxStylesCards}>
+            <Typography variant="h3" sx={titleStyles}>
                 {post.title}
               </Typography>
               <Typography variant="text2" sx={bodyStyles}>
@@ -152,7 +154,7 @@ export default function PostCard() {
               )}
             </Box>
           ))}
-        </>
+        </Box>
       ) : (
         <Typography
           variant="h4"
@@ -162,6 +164,6 @@ export default function PostCard() {
           Necesitas autenticación para Visualizar la información
         </Typography>
       )}
-    </Box>
+    </Container>
   );
 }

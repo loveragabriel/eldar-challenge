@@ -39,8 +39,8 @@ export default function Dashboard() {
           </Typography>
         </Typography>
         <Stack direction="column" alignItems="center" sx={stackStyles}>
+          <Stack onClick={cleanSession}>
           <IconButton
-            onClick={cleanSession}
             aria-label="Cerrar sesión"
             size="large"
           >
@@ -49,6 +49,7 @@ export default function Dashboard() {
           <Typography variant="caption" sx={typographyStyles}>
             Cerrar
           </Typography>
+          </Stack>
         </Stack>
       </Stack>
       <PostCard />
