@@ -17,6 +17,8 @@ localStorage.setItem("userList", JSON.stringify(users)); //Cargo las credenciale
 
 export default function LogIn() {
   const [alertStatus, setAlertStatus] = useState("");
+  const [errorAlert, setErrorAlert] = useState(null);
+
   const [isInputWrong, setIsInputWrong] = useState({
     isEmpty: false,
     isNumber: false,
@@ -77,7 +79,7 @@ export default function LogIn() {
         push("/dashboard");
       }, 2000); // 2000 millisecond
     } else {
-      alert("Debe ingresar con las credenciales correctas!");
+      setErrorAlert("Debe ingresar con las credenciales correctas!");
     }
   };
   return (
@@ -125,6 +127,7 @@ export default function LogIn() {
           name="credential"
           onChange={onChangeInputData}
         />
+        
       </Stack>
       {alertStatus === "success" && (
         <Alert
@@ -153,6 +156,33 @@ export default function LogIn() {
       >
         Enviar
       </Button>
+      {errorAlert && (
+        <Alert
+          style={{
+            position: "fixed",
+            top: "10vh",
+            left: 0,
+            right: 0,
+            margin: "0 auto",
+            width: {
+              xs: "90vw",
+              sm: "45vw",
+            },
+            backgroundColor: "#f44336",
+            color: "#fff",
+            borderRadius: "8px",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            textAlign: "center",
+            padding: "16px",
+          }}
+          variant="filled"
+          severity="error"
+          onClose={() => setErrorAlert(null)}
+        >
+          {errorAlert}
+        </Alert>
+      )}
+
     </Box>
   );
 }
