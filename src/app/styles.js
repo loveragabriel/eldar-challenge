@@ -20,5 +20,6 @@ export const containerStyles = {
       xs: '.7rem',
       sm: '1.2rem',
     },
+    marginTop:'1rem'
   };
   
