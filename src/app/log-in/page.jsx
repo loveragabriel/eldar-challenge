@@ -74,7 +74,6 @@ export default function LogIn({ users, alertSeverity, alertMessage }) {
     } else if (inputData.user === "Usuario") {
       saveUserInLocalStorage("userActive", "Usuario");
       setAlertStatus("success");
-      saveUserInLocalStorage("userActive", "Usuario");
       setTimeout(() => {
         push("/dashboard");
       }, 2000); // 2000 millisecond
