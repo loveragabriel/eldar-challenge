@@ -15,7 +15,7 @@ import { AuthenticationContext } from "@/context/AuthenticationContext";
 
 localStorage.setItem("userList", JSON.stringify(users)); //Cargo las credenciales al localStorage
 
-export default function LogIn({ users, alertSeverity, alertMessage }) {
+export default function LogIn() {
   const [alertStatus, setAlertStatus] = useState("");
   const [isInputWrong, setIsInputWrong] = useState({
     isEmpty: false,
@@ -67,7 +67,6 @@ export default function LogIn({ users, alertSeverity, alertMessage }) {
       sessionStorage.setItem("key", "value");
       setAlertStatus("success");
       saveUserInLocalStorage("userActive", "Administrador");
-      console.log(localStorage.getItem("userActive"));
       setTimeout(() => {
         push("/dashboard");
       }, 1000);
