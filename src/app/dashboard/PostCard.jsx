@@ -16,7 +16,6 @@ import {
   buttonStyles,
   alertContainerStyles,
   boxStylesCards, 
-  cardsBox
 } from "@/app/dashboard/stylesPostCard";
 
 export default function PostCard() {
@@ -84,7 +83,7 @@ export default function PostCard() {
         Últimos Post
       </Typography>
       {userActive == "admin" || userActive == "user" ? (
-        <Box sx={cardsBox}>
+        <Box >
           {postList.map((post) => (
             <Box key={post.id} sx={boxStylesCards}>
             <Typography variant="h3" sx={titleStyles}>

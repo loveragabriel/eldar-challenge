@@ -19,7 +19,6 @@ export default function GetDataApiProvider({ children }) {
         }
         fetchPosts();
     }, [])
-    console.log(postList);
     return (
         <GetDataApiContext.Provider value={{ postList }}>
             {children}
