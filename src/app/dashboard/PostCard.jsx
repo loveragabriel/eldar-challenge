@@ -69,7 +69,7 @@ export default function PostCard() {
           )}
         </Box>
       ))}
-     {displayPostForm && <NewPostForm/>}
+    {displayPostForm && <NewPostForm displayForm={displayPostForm} setDisplayForm={setDisplayPostForm} />}
     </Box>
   );
 }

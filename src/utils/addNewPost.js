@@ -17,7 +17,6 @@ export default function newPost(newTitle,newBody,newId){
             return response.json();
           })
           .then((json) => {
-            // Log the actual data received from the response
             console.log(json);
           })
           .catch((error) => {
