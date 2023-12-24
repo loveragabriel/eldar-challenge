@@ -62,7 +62,7 @@ export default function PostCard() {
           >
             {post.body}
           </Typography>
-          {userActive === "Administrador" && (
+          {userActive === "admin" && (
             <Stack direction="row" spacing={2}>
               <Button
                 sx={{

@@ -63,15 +63,15 @@ export default function LogIn() {
   };
 
   const submitInputData = () => {
-    if (inputData.user === "Administrador") {
+    if (inputData.user === "admin") {
       sessionStorage.setItem("key", "value");
       setAlertStatus("success");
-      saveUserInLocalStorage("userActive", "Administrador");
+      saveUserInLocalStorage("userActive", "admin");
       setTimeout(() => {
         push("/dashboard");
       }, 1000);
-    } else if (inputData.user === "Usuario") {
-      saveUserInLocalStorage("userActive", "Usuario");
+    } else if (inputData.user === "user") {
+      saveUserInLocalStorage("userActive", "user");
       setAlertStatus("success");
       setTimeout(() => {
         push("/dashboard");
