@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { Container, Stack, Typography, IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
 import PostCard from "@/app/dashboard/PostCard";
@@ -10,12 +10,18 @@ import {
   stackStyles,
   personIconStyles,
   typographyStyles,
-} from '@/app/dashboard/stylesDashboard';
+} from "@/app/dashboard/stylesDashboard";
 
 export default function Dashboard() {
   const router = useRouter();
+
   const { userActive, setUserActive } = useContext(AuthenticationContext);
   const user = localStorage.getItem("userActive");
+
+  if (!userActive) {
+    router.push("/log-in");
+    return null;
+  }
 
   const cleanSession = () => {
     localStorage.clear();
@@ -33,7 +39,11 @@ export default function Dashboard() {
           </Typography>
         </Typography>
         <Stack direction="column" alignItems="center" sx={stackStyles}>
-          <IconButton onClick={cleanSession} aria-label="Cerrar sesión" size="large">
+          <IconButton
+            onClick={cleanSession}
+            aria-label="Cerrar sesión"
+            size="large"
+          >
             <PersonIcon sx={personIconStyles} />
           </IconButton>
           <Typography variant="caption" sx={typographyStyles}>
