@@ -18,11 +18,19 @@ import {
 
 export default function PostCard() {
   const { postList } = useContext(GetDataApiContext);
-  const [alertStatus, setAlertStatus] = useState("");
-  const [alertUpdatePost, setAlertUpdatePost] = useState(false);
-  const [modifiedPostId, setModifiedPostId] = useState(null);
   const { userActive } = useContext(AuthenticationContext);
   const [newPostId, setNewPostId] = useState(null);
+
+  const [alertStatus, setAlertStatus] = useState({
+    show: false,
+    message: "",
+    severity: "info",
+  });
+
+  const [alertUpdatePost, setAlertUpdatePost] = useState({
+    show: false,
+    modifiedPostId: null,
+  });
 
   const addNewPost = () => {
     const postId = newPost();
@@ -35,8 +43,7 @@ export default function PostCard() {
   };
 
   const updatePost = (postId) => {
-    setAlertUpdatePost(!alertUpdatePost);
-    setModifiedPostId(postId);
+    setAlertUpdatePost({ show: true, modifiedPostId: postId });
   };
 
   const deletePost = () => {
@@ -45,6 +52,11 @@ export default function PostCard() {
       message: "Necesitas permisos para realizar esta acción",
       severity: "error",
     });
+  };
+
+  const closeAlert = () => {
+    setAlertStatus({ ...alertStatus, show: false });
+    setAlertUpdatePost({ ...alertUpdatePost, show: false });
   };
 
   return (
@@ -76,7 +88,7 @@ export default function PostCard() {
                   {newPostId && alertStatus.show && (
                     <Alert
                       sx={alertContainerStyles}
-                      onClick={() => setAlertStatus(!alertStatus)}
+                      onClick={closeAlert}
                       variant="filled"
                       severity={alertStatus.severity}
                     >
@@ -92,14 +104,14 @@ export default function PostCard() {
                   >
                     Modificar
                   </Button>
-                  {alertUpdatePost && modifiedPostId && (
+                  {alertUpdatePost.show && alertUpdatePost.modifiedPostId && (
                     <Alert
                       sx={alertContainerStyles}
                       variant="filled"
                       severity="info"
-                      onClick={() => setAlertUpdatePost(false)}
+                      onClick={closeAlert}
                     >
-                      Se actualizó el post {modifiedPostId}
+                      Se actualizó el post {alertUpdatePost.modifiedPostId}
                     </Alert>
                   )}
                   <Button
@@ -114,7 +126,7 @@ export default function PostCard() {
                       sx={alertContainerStyles}
                       variant="filled"
                       severity={alertStatus.severity}
-                      onClick={() => setAlertStatus(!alertStatus)}
+                      onClick={closeAlert}
                     >
                       {alertStatus.message}
                     </Alert>

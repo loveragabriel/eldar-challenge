@@ -1,5 +1,5 @@
 'use client'
-import { Container, Stack, Typography } from "@mui/material";
+import { Container, Stack, Typography, IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
 import PostCard from "@/app/dashboard/PostCard";
 import PersonIcon from "@mui/icons-material/Person";
@@ -13,15 +13,16 @@ import {
 } from '@/app/dashboard/stylesDashboard';
 
 export default function Dashboard() {
-  const { push } = useRouter();
+  const router = useRouter();
   const { userActive, setUserActive } = useContext(AuthenticationContext);
   const user = localStorage.getItem("userActive");
 
-  const cleanSesion = () => {
+  const cleanSession = () => {
     localStorage.clear();
     setUserActive("");
-    push("/");
+    router.push("/");
   };
+
   return (
     <Container>
       <Stack direction="row" sx={containerStyles}>
@@ -32,12 +33,12 @@ export default function Dashboard() {
           </Typography>
         </Typography>
         <Stack direction="column" alignItems="center" sx={stackStyles}>
-          <Stack onClick={cleanSesion} alignItems="center">
+          <IconButton onClick={cleanSession} aria-label="Cerrar sesión" size="large">
             <PersonIcon sx={personIconStyles} />
-            <Typography variant="caption" sx={typographyStyles}>
-              Cerrar
-            </Typography>
-          </Stack>
+          </IconButton>
+          <Typography variant="caption" sx={typographyStyles}>
+            Cerrar
+          </Typography>
         </Stack>
       </Stack>
       <PostCard />
