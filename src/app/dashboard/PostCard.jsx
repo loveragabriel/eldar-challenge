@@ -94,7 +94,7 @@ export default function PostCard() {
                 {post.body}
               </Typography>
               {userActive === "admin" && (
-                <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={1} >
                   <Button
                     sx={buttonStyles}
                     variant="contained"
@@ -139,7 +139,9 @@ export default function PostCard() {
                     size="small"
                     onClick={deletePost}
                     startIcon={<RemoveCircleIcon />}
-                  />
+                  >
+                    Borrar
+                  </Button>
                   {alertStatus.show && (
                     <Alert
                       sx={alertContainerStyles}

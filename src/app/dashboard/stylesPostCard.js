@@ -1,4 +1,3 @@
-// stylesPostCard.js
 export const boxStyles = {
     display: "flex",
     flexDirection: "column",
@@ -12,15 +11,11 @@ export const boxStyles = {
     borderRadius: 8,
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     transition: 'transform 0.3s ease-in-out',
-    '&:hover': {
-      transform: 'scale(1.05)',
-      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-    }
   };
   
   export const titleStyles = {
     fontSize: {
-      xs: "1rem",
+      xs: ".9rem",
       sm: "2rem",
     },
     color: "blue",
@@ -32,14 +27,14 @@ export const boxStyles = {
   export const bodyStyles = {
     color: "black",
     fontSize: {
-      xs: ".7rem",
+      xs: ".6rem",
       sm: "1.5rem",
     },
   };
   
   export const buttonStyles = {
     fontSize: {
-      xs: "0.5rem",
+      xs: "0.4rem",
       sm: "1rem",
     },
   };
