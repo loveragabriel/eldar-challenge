@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Box,
   Stack,
@@ -8,10 +9,17 @@ import {
   Alert,
 } from "@mui/material";
 import { useState } from "react";
-import users from "../../data/roles";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { AuthenticationContext } from "@/context/AuthenticationContext";
+import users from "@/data/roles";
+import {
+  containerStyles,
+  titleStyles,
+  alertStyles,
+  buttonStyles,
+  errorAlertStyles,
+} from "@/app/log-in/styles";
 
 localStorage.setItem("userList", JSON.stringify(users)); //Cargo las credenciales al localStorage
 
@@ -82,23 +90,10 @@ export default function LogIn() {
       setErrorAlert("Debe ingresar con las credenciales correctas!");
     }
   };
+
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyItems: "center",
-        height: "100vh",
-        margin: {
-          xs: "10vh 5vw",
-          sm: "10vh 25vw",
-        },
-      }}
-    >
-      <Typography
-        variant="h4"
-        sx={{ textAlign: "center", marginBottom: "3vh" }}
-      >
+    <Box sx={containerStyles}>
+      <Typography variant="h4" sx={titleStyles}>
         Iniciar Sesión
       </Typography>
       <Stack spacing={2}>
@@ -127,54 +122,19 @@ export default function LogIn() {
           name="credential"
           onChange={onChangeInputData}
         />
-        
       </Stack>
       {alertStatus === "success" && (
-        <Alert
-          sx={{
-            position: "fixed",
-            top: "10vh",
-            left: 0,
-            right: 0,
-            margin: "0 auto",
-            width:{
-              xs:'90vw', 
-              sm:'45vw'
-            }
-          }}
-          variant="filled"
-          severity="success"
-        >
+        <Alert sx={alertStyles} variant="filled" severity="success">
           Bienvenido {userActive}
         </Alert>
       )}
 
-      <Button
-        onClick={submitInputData}
-        sx={{ marginTop: "20px" }}
-        variant="contained"
-      >
+      <Button onClick={submitInputData} sx={buttonStyles} variant="contained">
         Enviar
       </Button>
       {errorAlert && (
         <Alert
-          style={{
-            position: "fixed",
-            top: "10vh",
-            left: 0,
-            right: 0,
-            margin: "0 auto",
-            width: {
-              xs: "90vw",
-              sm: "45vw",
-            },
-            backgroundColor: "#f44336",
-            color: "#fff",
-            borderRadius: "8px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-            textAlign: "center",
-            padding: "16px",
-          }}
+          sx={errorAlertStyles}
           variant="filled"
           severity="error"
           onClose={() => setErrorAlert(null)}
@@ -182,7 +142,6 @@ export default function LogIn() {
           {errorAlert}
         </Alert>
       )}
-
     </Box>
   );
 }
