@@ -18,7 +18,7 @@ export default function Dashboard() {
   const { userActive, setUserActive } = useContext(AuthenticationContext);
   const user = localStorage.getItem("userActive");
 
-  if (!userActive) {
+  if (!user) {
     router.push("/log-in");
     return null;
   }
