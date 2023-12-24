@@ -6,30 +6,42 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import EditIcon from "@mui/icons-material/Edit";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { AuthenticationContext } from "@/context/AuthenticationContext";
-import NewPostForm from '@/components/NewPostForm'
+import NewPostForm from "@/components/NewPostForm";
+
 export default function PostCard() {
-  const [displayPostForm, setDisplayPostForm] = useState(false); 
+  const [displayPostForm, setDisplayPostForm] = useState(false);
   const { postList } = useContext(GetDataApiContext);
   const { userActive } = useContext(AuthenticationContext);
-  const addNewPost =()=>{
-    setDisplayPostForm(true)
-  }
+  const addNewPost = () => {
+    alert("Un nuevo post ha sido creado");
+  };
 
-  const updatePost =()=>{
-    alert('Update Post')
-  }
-
-  const deletePost =()=>{
-    alert('Delete Post')
-  }
+  const updatePost = () => {
+    alert("Post Updated");
+  };
 
   return (
     <Box>
-      {/* <Typography >
-        {firstTitle}
-      </Typography> */}
+      <Typography
+        variant="h5"
+        sx={{
+          fontSize: {
+            xs: "1.5rem",
+            sm: "2.5rem",
+          },
+        }}
+      >
+        Últimos Post
+      </Typography>
       {postList.map((post) => (
-        <Box key={post.id} sx={{ display: "flex", flexDirection: "column" }}>
+        <Box
+          key={post.id}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            marginBottom: "1rem",
+          }}
+        >
           <Typography
             variant="h3"
             sx={{
@@ -42,34 +54,63 @@ export default function PostCard() {
           >
             {post.title}
           </Typography>
-          <Typography variant="h6" sx={{ color: "black" }}>
+          <Typography
+            variant="text2"
+            sx={{
+              color: "black",
+              fontSize: {
+                xs: "1rem",
+                sm: "1.5rem",
+              },
+            }}
+          >
             {post.body}
           </Typography>
           {userActive === "Administrador" && (
             <Stack direction="row" spacing={2}>
               <Button
+                sx={{
+                  fontSize: {
+                    xs: "0.5rem",
+                    sm: "1rem",
+                  },
+                }}
                 variant="contained"
                 size="small"
                 startIcon={<AddCircleIcon />}
-                onClick={(addNewPost)}
-              />
+                onClick={addNewPost}
+              >
+                Crear
+              </Button>
               <Button
+                sx={{
+                  fontSize: {
+                    xs: "0.5rem",
+                    sm: "1rem",
+                  },
+                }}
                 variant="contained"
                 size="small"
                 startIcon={<EditIcon />}
-                onClick={(updatePost)}
-              />
+                onClick={updatePost}
+              >
+                Modificar
+              </Button>
               <Button
+                sx={{
+                  fontSize: {
+                    xs: "0.5rem",
+                    sm: "1rem",
+                  },
+                }}
                 variant="contained"
                 size="small"
                 startIcon={<RemoveCircleIcon />}
-                onClick={(deletePost)}
               />
             </Stack>
           )}
         </Box>
       ))}
-    {displayPostForm && <NewPostForm displayForm={displayPostForm} setDisplayForm={setDisplayPostForm} />}
     </Box>
   );
 }
