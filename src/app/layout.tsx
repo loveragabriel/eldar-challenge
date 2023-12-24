@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import './globals.css'
 import { AuthenticationProvider } from '@/context/AuthenticationContext'
 import {GetDataApiProvider} from '@/context/GetDataApiContext'
 
@@ -7,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Gabriel Lovera - Challenge',
-  description: 'Challenage Front End Eldar Srl',
+  description: 'Challenge Front End Eldar Srl',
 }
 
 export default function RootLayout({
