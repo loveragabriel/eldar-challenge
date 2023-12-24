@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, Button } from "@mui/material";
+import { Box, Stack, Typography, Button, Alert } from "@mui/material";
 import { useContext } from "react";
 import { GetDataApiContext } from "@/context/GetDataApiContext";
 import { AuthenticationContext } from "@/context/AuthenticationContext";
@@ -7,15 +7,20 @@ import EditIcon from "@mui/icons-material/Edit";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import newPost from "@/utils/addNewPost";
 import updatePost from "@/utils/updatePost";
+import { useState } from "react";
 
 export default function PostCard() {
   const { postList } = useContext(GetDataApiContext);
+  const [alertStatus, setAlertStatus] = useState("");
   const { userActive } = useContext(AuthenticationContext);
   const addNewPost = () => {
     newPost();
     alert("Post Creado");
   };
 
+  const deletePost =()=>{
+    setAlertStatus(!alertStatus)
+  }
   return (
     <Box>
       <Typography
@@ -103,8 +108,29 @@ export default function PostCard() {
                 }}
                 variant="contained"
                 size="small"
-                startIcon={<RemoveCircleIcon />}
+                onClick={deletePost}
+                startIcon={<RemoveCircleIcon
+                 />}
               />
+                {alertStatus && (
+        <Alert
+          sx={{
+            position: "fixed",
+            top: "10vh",
+            left: 0,
+            right: 0,
+            margin: "0 auto",
+            width:{
+              xs:'90vw', 
+              sm:'45vw'
+            }
+          }}
+          variant="filled"
+          severity="error"
+        >
+          No tienes los permisos para realizar esta acción!
+        </Alert>
+      )}
             </Stack>
           )}
         </Box>
