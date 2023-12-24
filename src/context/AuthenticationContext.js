@@ -18,8 +18,13 @@ export default function AuthenticationProvider({ children }) {
         localStorage.setItem(`${keyValue}`, `${dataValue}`);
         setUserActive(localStorage.getItem(`${keyValue}`));
     }
+
+    const isAuthenticated = () => {
+        const user = localStorage.getItem("userActive");
+        return user !== null; // Check if the user is authenticated
+      };
     return (
-        <AuthenticationContext.Provider value={{ saveUserInLocalStorage, userActive, setUserActive }}>
+        <AuthenticationContext.Provider value={{ saveUserInLocalStorage, userActive, setUserActive, isAuthenticated }}>
             {children}
         </AuthenticationContext.Provider>
     )

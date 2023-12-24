@@ -3,6 +3,7 @@ import { Box, Stack, Typography, Button, Alert } from "@mui/material";
 import { useContext } from "react";
 import { GetDataApiContext } from "@/context/GetDataApiContext";
 import { AuthenticationContext } from "@/context/AuthenticationContext";
+import { useRouter } from "next/navigation";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import EditIcon from "@mui/icons-material/Edit";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
@@ -14,11 +15,12 @@ import {
   bodyStyles,
   buttonStyles,
   alertContainerStyles,
-} from '@/app/dashboard/stylesPostCard';
+} from "@/app/dashboard/stylesPostCard";
 
 export default function PostCard() {
+  const router = useRouter();
   const { postList } = useContext(GetDataApiContext);
-  const { userActive } = useContext(AuthenticationContext);
+  const { userActive, isAuthenticated } = useContext(AuthenticationContext);
   const [newPostId, setNewPostId] = useState(null);
 
   const [alertStatus, setAlertStatus] = useState({
@@ -33,6 +35,10 @@ export default function PostCard() {
   });
 
   const addNewPost = () => {
+    if (!isAuthenticated()) {
+      router.push("/log-in");
+      return;
+    }
     const postId = newPost();
     setNewPostId(postId);
     setAlertStatus({
@@ -43,10 +49,18 @@ export default function PostCard() {
   };
 
   const updatePost = (postId) => {
+    if (!isAuthenticated()) {
+      router.push("/log-in");
+      return;
+    }
     setAlertUpdatePost({ show: true, modifiedPostId: postId });
   };
 
   const deletePost = () => {
+    if (!isAuthenticated()) {
+      router.push("/log-in");
+      return;
+    }
     setAlertStatus({
       show: true,
       message: "Necesitas permisos para realizar esta acción",
@@ -61,7 +75,10 @@ export default function PostCard() {
 
   return (
     <Box sx={boxStyles}>
-      <Typography variant="h5" sx={{ fontSize: { xs: "1.5rem", sm: "2.5rem" } }}>
+      <Typography
+        variant="h5"
+        sx={{ fontSize: { xs: "1.5rem", sm: "2.5rem" } }}
+      >
         Últimos Post
       </Typography>
       {userActive == "admin" || userActive == "user" ? (
