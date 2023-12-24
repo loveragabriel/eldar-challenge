@@ -131,7 +131,13 @@ export default function LogIn() {
           sx={{
             position: "fixed",
             top: "10vh",
+            left: 0,
+            right: 0,
             margin: "0 auto",
+            width:{
+              xs:'90vw', 
+              sm:'45vw'
+            }
           }}
           variant="filled"
           severity="success"
