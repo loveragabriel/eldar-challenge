@@ -45,8 +45,10 @@ export default function Dashboard() {
             },
           }}
         >
-          <PersonIcon color="primary" onClick={cleanSesion}></PersonIcon>
-          <Typography variant="caption">Cerrar</Typography>
+          <Stack onClick={cleanSesion} alignItems='center'>
+            <PersonIcon color="primary"></PersonIcon>
+            <Typography variant="caption">Cerrar</Typography>
+          </Stack>
         </Stack>
       </Stack>
       <PostCard></PostCard>

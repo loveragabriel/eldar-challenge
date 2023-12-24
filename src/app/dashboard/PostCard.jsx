@@ -29,6 +29,8 @@ export default function PostCard() {
       >
         Últimos Post
       </Typography>
+      {userActive == 'admin' || userActive == 'user' ?
+      <>
       {postList.map((post) => (
         <Box
           key={post.id}
@@ -107,6 +109,12 @@ export default function PostCard() {
           )}
         </Box>
       ))}
+      </> : 
+      <Typography variant="h4" color='red' sx={{fontSize: {
+        xs:'1.5rem', 
+        sm:'2.5rem'
+      }}}>Necesitas autenticación para Visualizar la información</Typography>
+}
     </Box>
   );
 }
