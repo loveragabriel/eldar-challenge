@@ -1,10 +1,10 @@
-export default function newPost(newTitle,newBody,newId){
+export default function newPost(){
     fetch('https://jsonplaceholder.typicode.com/posts', {
         method: 'POST',
         body: JSON.stringify({
-          title: newTitle,
-          body: newBody,
-          userId: newId,
+          title: 'New Title',
+          body: 'NewBody',
+          userId: '2024',
         }),
         headers: {
             'Content-type': 'application/json; charset=UTF-8',

@@ -1,23 +1,19 @@
 import { Box, Stack, Typography, Button } from "@mui/material";
-import React, { useState } from "react";
 import { useContext } from "react";
 import { GetDataApiContext } from "@/context/GetDataApiContext";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import EditIcon from "@mui/icons-material/Edit";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { AuthenticationContext } from "@/context/AuthenticationContext";
-import NewPostForm from "@/components/NewPostForm";
+import newPost from "@/utils/addNewPost";
+import updatePost from "@/utils/updatePost";
 
 export default function PostCard() {
-  const [displayPostForm, setDisplayPostForm] = useState(false);
   const { postList } = useContext(GetDataApiContext);
   const { userActive } = useContext(AuthenticationContext);
   const addNewPost = () => {
-    alert("Un nuevo post ha sido creado");
-  };
-
-  const updatePost = () => {
-    alert("Post Updated");
+    newPost();
+    alert("Post Creado");
   };
 
   return (
@@ -92,7 +88,7 @@ export default function PostCard() {
                 variant="contained"
                 size="small"
                 startIcon={<EditIcon />}
-                onClick={updatePost}
+                onClick={() => updatePost(post.id)}
               >
                 Modificar
               </Button>
